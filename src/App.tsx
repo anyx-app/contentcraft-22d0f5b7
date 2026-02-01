@@ -1,32 +1,26 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ThemeProvider } from "@/theme/ThemeProvider";
-import Index from "./pages/Index";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import AppShell from './components/layout/AppShell';
+import Dashboard from './pages/Dashboard';
 
-const queryClient = new QueryClient();
+// Placeholder components for other routes
+const Posts = () => <div className="p-4 text-slate-500">Posts Page (Coming Soon)</div>;
+const Media = () => <div className="p-4 text-slate-500">Media Library (Coming Soon)</div>;
+const Subscribers = () => <div className="p-4 text-slate-500">Subscribers Page (Coming Soon)</div>;
+const Settings = () => <div className="p-4 text-slate-500">Settings Page (Coming Soon)</div>;
 
-/**
- * Default App structure for single-page applications.
- * 
- * For multi-page apps with routing:
- * 1. Import BrowserRouter, Routes, Route from 'react-router-dom'
- * 2. Wrap content in <BrowserRouter><Routes>...</Routes></BrowserRouter>
- * 3. Add routes: <Route path="/about" element={<About />} />
- * 
- * See docs/ROUTING.md for detailed instructions.
- */
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <ThemeProvider>
-        <Index />
-      </ThemeProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<AppShell />}>
+        <Route index element={<Dashboard />} />
+        <Route path="posts" element={<Posts />} />
+        <Route path="media" element={<Media />} />
+        <Route path="subscribers" element={<Subscribers />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
+    </Routes>
+  );
+}
 
 export default App;
